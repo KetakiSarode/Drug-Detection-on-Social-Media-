@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drug Detection Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url({{ url_for('static', filename='hacker.jpeg') }});
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex; /* Set body as a flex container */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+        }
+
+        .container {
+            max-width: 600px; /* Increased max-width */
+            width: 80%; /* Set width to 80% */
+            margin: auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .report-button {
+            display: block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: black;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .report-button:hover {
+            background-color: #0067a;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Drug Detection Results</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Caption</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for caption, result in bert_model_results %}
+                <tr>
+                    <td>{{ caption }}</td>
+                    <td>{{ result }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Button for reporting -->
+    <a href="{{url_for('report')}}" class="report-button">Report</a>
+</div>
+
+</body>
+</html>

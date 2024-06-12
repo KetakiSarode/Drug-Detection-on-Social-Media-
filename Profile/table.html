@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            background-image: url({{ url_for('static', filename='hacker.jpeg') }});
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-y: hidden; /* Hide vertical scrollbar */
+        }
+
+        .profile-container {
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 600px; /* Increased width */
+            height: 120px; /* Reduced height */
+            overflow: auto; /* Add scrollbar if content exceeds height */
+        }
+
+        .profile-container h2 {
+            color: black;
+        }
+
+        .profile-container p {
+            color: black;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+            color: #fff;
+        }
+
+        .table-container {
+            max-height: calc(100vh - 320px); /* Adjust as needed */
+            overflow: auto;
+            position: relative;
+            margin-bottom: 20px; /* Add margin to prevent overlap with buttons */
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: black; /* Change to black */
+            color: white; /* Change text color to white */
+            position: sticky;
+            top: 0;
+            z-index: 1; /* Ensure it's above other elements */
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        .button {
+            margin-top: 30px; /* Adjusted margin */
+            padding: 10px 20px;
+            background-color: white;
+            color: black;
+            border: 2px solid black; /* Added border */
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition */
+        }
+
+        .button:hover {
+            background-color: black; /* Change background color on hover */
+            color: white; /* Change text color on hover */
+            border-color: transparent; /* Change border color on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h2>{{ username }}</h2>
+        <p>{{ bio }}</p>
+    </div>
+
+    <h2>CSV Data Table</h2>
+    <div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Post URL</th>
+                <th>Caption</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in csv_data %}
+            <tr>
+                <td><a href="{{ row[0] }}" target="_blank">{{ row[0] }}</a></td>
+                <td>{{ row[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    <div class="button-container">
+        <a href="/results" class="button">Search for Drugs in Text</a>
+        <a href="https://detect.roboflow.com/?model=drug-detection-jgolc&version=1&api_key=gLGRgQqPCg16zTeW4Dry" class="button">Search for Drugs in Images</a>
+    </div>
+</body>
+</html>

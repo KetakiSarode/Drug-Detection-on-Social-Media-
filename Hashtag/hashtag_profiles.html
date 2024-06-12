@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Profiles for Hashtag</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url({{ url_for('static', filename='hacker.jpeg') }});
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex; /* Set body as a flex container */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            overflow: hidden; /* Hide scrollbar */
+        }
+
+        .container {
+            width: 80%; /* Set width to 80% */
+            max-width: 400px; /* Increased max-width */
+            margin: auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .profile-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .profile-list-item {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Top Profiles for Hashtag</h2>
+    <ul class="profile-list">
+        {% for profile in top_profiles %}
+            <li class="profile-list-item">{{ profile }}</li>
+        {% endfor %}
+    </ul>
+</div>
+</body>
+</html>

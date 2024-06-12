@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOLO Model Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .result {
+            margin-bottom: 20px;
+        }
+        .image {
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>YOLO Model Results</h1>
+    {% for link, result in results.items() %}
+        <div class="result">
+            <h2>Image: {{ link }}</h2>
+            {% if 'error' in result %}
+                <p class="error">Error: {{ result.error }}</p>
+            {% else %}
+                <img src="{{ link }}" alt="Image" class="image">
+                <p>Detection results:</p>
+                <ul>
+                    {% for detection in result %}
+                        <li>{{ detection }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    {% endfor %}
+</body>
+</html>
